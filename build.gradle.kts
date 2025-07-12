@@ -4,6 +4,9 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    }
 }
 
 dependencies {
@@ -18,4 +21,15 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks {
+    jar {
+        archiveBaseName.set("RGuilds-API")
+        archiveClassifier.set("")
+        archiveVersion.set("3.0.1")
+    }
+    build{
+        dependsOn(jar)
+    }
 }
