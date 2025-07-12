@@ -1,6 +1,5 @@
 plugins {
     id("java")
-    id("maven-publish")
 }
 
 repositories {
@@ -33,26 +32,16 @@ tasks {
         archiveClassifier.set("")
         archiveVersion.set("3.0.1")
     }
-    build {
+    build{
         dependsOn(jar)
     }
 }
+
 
 configurations.all {
     resolutionStrategy.eachDependency {
         if (requested.group == "com.google.guava" && requested.name == "guava") {
             useTarget("com.google.guava:guava:32.1.2-jre")
-        }
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            groupId = "com.github.Weesli"
-            artifactId = "rguilds-api"
-            version = "3.0.1"
         }
     }
 }
