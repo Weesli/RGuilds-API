@@ -18,9 +18,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.28")
     compileOnly("org.jetbrains:annotations:23.0.0")
     annotationProcessor("org.jetbrains:annotations:23.0.0")
-    implementation("com.google.guava:guava:32.1.2-jre") {
-        because("avoid resolution conflict on JitPack")
-    }
+    implementation("com.google.guava:guava:31.1-jre")
 }
 
 tasks.test {
@@ -41,7 +39,7 @@ tasks {
 configurations.all {
     resolutionStrategy.eachDependency {
         if (requested.group == "com.google.guava" && requested.name == "guava") {
-            useTarget("com.google.guava:guava:32.1.2-jre")
+            useTarget("com.google.guava:guava:31.1-jre")
         }
     }
 }
