@@ -1,4 +1,4 @@
 jdk:
-  - openjdk17
+  - openjdk8
 before_install:
   - ./gradlew wrapper --gradle-version 7.6
