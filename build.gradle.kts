@@ -3,6 +3,11 @@ plugins {
     id("maven-publish")
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 repositories {
     mavenCentral()
     maven {
@@ -31,26 +36,23 @@ tasks {
         archiveClassifier.set("")
         archiveVersion.set("3.0.1")
     }
+
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+
     build {
         dependsOn(jar)
     }
 }
 
 configurations.all {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "com.google.guava" && requested.name == "guava") {
-            useTarget("com.google.guava:guava:31.1-jre")
-        }
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            groupId = "com.github.Weesli"
-            artifactId = "rguilds-api"
-            version = "3.0.1"
+    resolutionStrategy {
+        force("com.google.guava:guava:31.1-jre")
+        eachDependency {
+            if (requested.group == "com.google.guava" && requested.name == "guava") {
+                useVersion("31.1-jre")
+            }
         }
     }
 }
