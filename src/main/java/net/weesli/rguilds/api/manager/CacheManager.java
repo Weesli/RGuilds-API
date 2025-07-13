@@ -3,6 +3,7 @@ package net.weesli.rguilds.api.manager;
 import net.weesli.rguilds.api.model.Guild;
 import net.weesli.rguilds.api.model.User;
 
+import java.util.Map;
 import java.util.UUID;
 
 public interface CacheManager {
@@ -16,4 +17,7 @@ public interface CacheManager {
     User getUser(UUID uuid);
     boolean isValidUser(UUID uuid);
     boolean isValidGuild(String id);
+
+    Map<String, Guild> getGuilds();
+    Map<UUID, User> getUsers();
 }
