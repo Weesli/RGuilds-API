@@ -3,6 +3,9 @@ plugins {
     id("maven-publish")
 }
 
+group = "com.github.Weesli"
+version = "3.0.1"
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
@@ -54,6 +57,17 @@ configurations.all {
             if (requested.group == "com.google.guava" && requested.name == "guava") {
                 useVersion("31.1-jre")
             }
+        }
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            groupId = "com.github.Weesli"
+            artifactId = "rguilds-api"
+            version = "3.0.1"
         }
     }
 }
